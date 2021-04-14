@@ -9,6 +9,21 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/purchases',
+    name: 'Purchases',
+    component: () => import(/* webpackChunkName: "Purchases" */ '@/pages/Purchases.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "Profile" */ '@/pages/Profile.vue')
+  },
+  {
+    path: '/create-order',
+    name: 'CreateOrder',
+    component: () => import(/* webpackChunkName: "CreateOrder" */ '@/pages/CreateOrder.vue')
   }
 ]
 

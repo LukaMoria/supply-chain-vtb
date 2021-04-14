@@ -32,8 +32,8 @@ export default {
   data() {
     return {
       links: [
+        { href: '/', name: 'Предложения', icon: 'shop' },
         { href: '/profile', name: 'Мой профиль', icon: 'face' },
-        { href: '/offers', name: 'Предложения', icon: 'shop'},
         { href: '/purchases', name: 'Мои покупки', icon: 'cases'},
         { href: '/create-order', name: 'Создание заявки', icon: 'receipt'}
       ]

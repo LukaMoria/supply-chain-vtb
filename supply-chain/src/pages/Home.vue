@@ -1,5 +1,5 @@
 <template>
-  <div>Home qweqwekqwekqw asdnakndklasndklasndklansdlkasndlkans</div>
+  <div>Плиточка из заявок</div>
 </template>
 
 <script>
@@ -9,8 +9,7 @@ export default {
   components: {},
 
   data () {
-    return {
-    }
+    return {}
   }
 }
 </script>
