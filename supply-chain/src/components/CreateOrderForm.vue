@@ -27,6 +27,24 @@
         :rules="[ val => val && val.length > 0 && Number(val) > 0 || 'Число должно быть больше 0']"
       ></q-input>
 
+      <q-input
+        filled
+        v-model="finalPrice"
+        label="Цена"
+        hint="Цена за все предложение"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 && Number(val) > 0 || 'Число должно быть больше 0']"
+      ></q-input>
+
+      <q-input
+        filled
+        v-model="buyer"
+        label="Кошелек"
+        hint="Номер кошелька продавца"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please type something']"
+      ></q-input>
+
       <q-toggle v-model="accept" label="Я принимаю условия использования"></q-toggle>
 
       <div>
@@ -62,7 +80,9 @@ export default {
       ],
       amount: null,
       typeOfVacine: null,
-      accept: false
+      accept: false,
+      buyer: null,
+      finalPrice: null
     }
   },
   computed: {
