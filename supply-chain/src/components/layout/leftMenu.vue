@@ -35,7 +35,7 @@ export default {
         { href: '/', name: 'Предложения', icon: 'shop' },
         { href: '/profile', name: 'Мой профиль', icon: 'face' },
         { href: '/purchases', name: 'Мои покупки', icon: 'cases'},
-        { href: '/create-order', name: 'Создание заявки', icon: 'receipt'}
+        { href: '/create-order', name: 'Создание предложения', icon: 'receipt'}
       ]
     }
   }
