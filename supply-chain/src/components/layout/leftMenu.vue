@@ -8,7 +8,7 @@
     >
       <q-list>
         <q-item-label header class="label">Меню</q-item-label>
-        <q-item v-for="(item,index) in links" :key="index" :to="item.href" clickable>
+        <q-item v-for="(item,index) in links" :key="index" :to="item.href" clickable exact>
           <q-item-section avatar>
             <q-icon :name="item.icon" />
           </q-item-section>

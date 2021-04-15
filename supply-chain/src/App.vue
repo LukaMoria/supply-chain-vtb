@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          VMarket
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>version: 0.0.1</div>
       </q-toolbar>
     </q-header>
 

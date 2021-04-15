@@ -57,7 +57,8 @@
 </template>
 
 <script>
-import { createContract, data } from '../contracts/offer'
+import { createContract, address } from '../contracts/offer'
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'CreateOrderForm',
@@ -81,7 +82,7 @@ export default {
       amount: null,
       typeOfVacine: null,
       accept: false,
-      buyer: null,
+      buyer: '0x06221c24fBa452c2a2716F9Ec705fd001536296a', //hardcode
       finalPrice: null
     }
   },
@@ -92,12 +93,12 @@ export default {
   },
   methods: {
     async onSubmit () {
-      const contract = createContract('')
+      const contract = createContract(address)
       console.log(contract)
-      const shadow = await contract.deploy({data, arguments: []})
-      console.log(data)
-      const deployedContract = await shadow.send()
-      console.log(deployedContract)
+      const uuid = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+      const res = await contract.methods.createOffer(uuid, this.name, this.typeOfVacine.value, this.finalPrice, this.amount, this.buyer)
+        .send({from: this.buyer})
+      console.log(res)
     },
 
     onReset () {
