@@ -23,7 +23,7 @@ contract Offers {
                 string memory _type_v,
                 uint _price, 
                 uint256 _amount, 
-                address payable _wallet
+                address _wallet
                 ) public{
         offers[_UID] = Offer({owner: msg.sender,
                                     title: _title,
