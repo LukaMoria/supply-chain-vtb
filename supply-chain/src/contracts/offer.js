@@ -215,6 +215,7 @@ const abi = [
  ]
 
 export const createContract = (address, from='0x06221c24fBa452c2a2716F9Ec705fd001536296a') => { //hardcode wallet metamask
+  // web3.eth.setProvider('http://95.163.208.208:19000/')
   const instance = new web3.eth.Contract(abi, address, { from });
   return instance;
 };

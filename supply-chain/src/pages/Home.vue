@@ -27,7 +27,6 @@ export default {
 
   async created() {
     const contract = createContract(address)
-    console.log(contract)
     const res = await contract.methods.returnAllOffers().call({from: '0x06221c24fBa452c2a2716F9Ec705fd001536296a'})
     this.offers = res
   }
