@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.8.3;
+pragma solidity 0.4.19;
 
 contract Offers {
     string UID;
@@ -10,17 +10,14 @@ contract Offers {
         string type_v;
         uint price;
         uint256 amount;
-        address payable OwnerWallet;
+        address OwnerWallet;
     }
     
-    mapping (string => Offer) public offers;
+    mapping (string => Offer) private offers;
     Offer[] public offerList;
     
     event ProductCreated(string UID);
-    event ESMCreated(string UID, address payable buyer, address payable seller);
 
-
-    //  кошелек
     function createOffer (string memory _UID, 
                 string memory _title, 
                 string memory _type_v,
@@ -36,7 +33,7 @@ contract Offers {
                                     OwnerWallet: _wallet
         });
         offerList.push(offers[_UID]);
-        emit ProductCreated(_UID);
+        ProductCreated(_UID);
     }
     
     function returnAllOffers() public view returns(Offer[] memory){
