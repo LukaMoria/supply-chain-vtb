@@ -117,9 +117,9 @@ contract DssSafeDeal is Ownable {
         return deals[_UID];
     }
     
-    function getAllDeal(string _UID) public {
-        return deals[_UID];
-    }
+    //function getAllDeal(string _UID) public {
+    //    return deals[_UID];
+    //}
         
 }
 
