@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import DealsContract from '../contracts/deals'
 
 export default {
   name: 'Card',
@@ -100,8 +101,10 @@ export default {
     }
   },
   methods: {
-    createESM() {
-      console.log('Сделка открыта!')
+    async createESM() {
+      const res = await DealsContract.methods.createEscrowDeal(this.offer[7], this.offer[6], this.buyer, '0xc0f359FE770F1b98932dB77dA3977A7174D35362')
+        .send({from: '0x06221c24fBa452c2a2716F9Ec705fd001536296a'})
+      console.log(res)
     }
   }
 }

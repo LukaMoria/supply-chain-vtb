@@ -36,9 +36,11 @@
         :rules="[ val => val && val.length > 0 && Number(val) > 0 || 'Число должно быть больше 0']"
       ></q-input>
 
+      <q-select :options="currencies" filled label="Валюта" v-model="currency" hint="Тип валюты"/>
+
       <q-input
         filled
-        v-model="buyer"
+        v-model="seller"
         label="Кошелек"
         hint="Номер кошелька продавца"
         lazy-rules
@@ -79,11 +81,13 @@ export default {
           value: 'kovivac'
         }
       ],
+      currencies: [ {label: 'RUB', value: 0}, {label: 'USD', value: 1}, {label: 'EUR', value: 2} ],
       amount: null,
       typeOfVacine: null,
       accept: false,
-      buyer: '0x06221c24fBa452c2a2716F9Ec705fd001536296a', //hardcode
-      finalPrice: null
+      seller: '0x06221c24fBa452c2a2716F9Ec705fd001536296a', //hardcode
+      finalPrice: null,
+      currency: null
     }
   },
   computed: {
@@ -96,8 +100,8 @@ export default {
       const contract = createContract(address)
       console.log(contract)
       const uuid = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-      const res = await contract.methods.createOffer(uuid, this.name, this.typeOfVacine.value, this.finalPrice, this.amount, this.buyer)
-        .send({from: this.buyer})
+      const res = await contract.methods.createOffer(uuid, this.name, this.typeOfVacine.value, this.finalPrice, this.amount, this.currency.value, this.seller)
+        .send({from: this.seller})
       console.log(res)
     },
 
@@ -105,6 +109,8 @@ export default {
       this.name = null
       this.amount = null
       this.accept = false
+      this.seller  = null
+      this.finalPrice = null
       this.typeOfVacine = null
     }
   }
