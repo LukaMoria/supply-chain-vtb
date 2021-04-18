@@ -2,6 +2,7 @@ import Web3 from 'web3';
 
 if (window.ethereum) {
   window.web3 = new Web3(window.ethereum);
+  //window.web3.eth.setProvider('http://95.163.208.208:19000/')
   try {
     // Request account access if needed
     window.ethereum.enable();

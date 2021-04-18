@@ -51,11 +51,27 @@
           Открыть сделку
         </q-btn>
     </q-card-actions>
+
+    <q-dialog v-model="alert">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Внимание!</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Продавец отправил Вам товар. Подтвердите получение!
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Подтвердите получение!" color="primary" v-close-popup></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-card>
 </template>
 
 <script>
-import DealsContract from '../contracts/deals'
+// import DealsContract from '../contracts/deals'
 
 export default {
   name: 'Card',
@@ -67,6 +83,7 @@ export default {
   },
   data() {
     return {
+      alert: false,
       buyer: null,
       isInputOpen: false,
       stars: 5,
@@ -102,9 +119,7 @@ export default {
   },
   methods: {
     async createESM() {
-      const res = await DealsContract.methods.createEscrowDeal(this.offer[7], this.offer[6], this.buyer, '0xc0f359FE770F1b98932dB77dA3977A7174D35362')
-        .send({from: '0x06221c24fBa452c2a2716F9Ec705fd001536296a'})
-      console.log(res)
+      this.alert = true
     }
   }
 }

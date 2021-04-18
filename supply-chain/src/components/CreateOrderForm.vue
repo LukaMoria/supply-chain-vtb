@@ -81,13 +81,14 @@ export default {
           value: 'kovivac'
         }
       ],
-      currencies: [ {label: 'RUB', value: 0}, {label: 'USD', value: 1}, {label: 'EUR', value: 2} ],
+      currencies: [ {label: 'RUB', value: 810}, {label: 'USD', value: 840}, {label: 'EUR', value: 978} ],
       amount: null,
       typeOfVacine: null,
       accept: false,
-      seller: '0x06221c24fBa452c2a2716F9Ec705fd001536296a', //hardcode
+      seller: '',
       finalPrice: null,
-      currency: null
+      currency: null,
+      from: '0x06221c24fBa452c2a2716F9Ec705fd001536296a' //c
     }
   },
   computed: {
@@ -95,13 +96,18 @@ export default {
       return !this.name && !this.amount && !this.typeOfVacine && !this.accept
     }
   },
+  mounted(){
+    const contract = createContract(address)
+    console.log(contract)
+  },
   methods: {
     async onSubmit () {
-      const contract = createContract(address)
+      const contract = createContract(address, this.from)
       console.log(contract)
       const uuid = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-      const res = await contract.methods.createOffer(uuid, this.name, this.typeOfVacine.value, this.finalPrice, this.amount, this.currency.value, this.seller)
-        .send({from: this.seller})
+      const res = await contract.methods
+        .createOffer(uuid, this.name, this.typeOfVacine.value, this.currency.value, this.finalPrice, this.amount, this.seller)
+        .send({from: this.from})
       console.log(res)
     },
 
