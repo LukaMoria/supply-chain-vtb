@@ -1,49 +1,59 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.8.3;
+pragma solidity ^0.8.3;
 
-contract Offer
-{
-    address payable private owner;
-    string title;
-    uint price;
-    string description;
-    uint256 quantity;          // uint256 maxQuantity;
-    enum State{Opened, Booked, Approved, Rejected,  Declined, Completed}
-    State public offerState;
-    // mapping(address(this) => Purchase) puchasing;
-    // mapping(this => Purchase) puchasing;
+contract Offers {
+    string UID;
     
-    
-    
-    /** @dev constructor to creat an auction
-    * @param _owner who call createAuction() in AuctionBox contract
-    * @param _title the title of the auction
-    * @param _price the start price of the auction
-    * @param _description the description of the auction
-    */
-    
-    constructor(address payable _owner, string memory _title, uint _price, string memory _description, uint256 _quantity) {
-    // initialize 
-        owner = _owner;
-        title = _title;
-        price = _price;
-        description = _description;
-        quantity = _quantity;
-        offerState = State.Opened;
+
+    struct Offer{
+        address owner;
+        string title;
+        string type_v;
+        uint16 currencyCode;
+        uint price;
+        uint256 amount;
+        address OwnerWallet;
+        string uid;
+    }
+
+    mapping (string => Offer) private offers;
+    Offer[] public offerList;
+
+    event ProductCreated(string _UID);
+
+
+    function createOffer (string memory _UID,
+                string memory _title,
+                string memory _type_v,
+                uint16 _currencyCode,
+                uint _price,
+                uint256 _amount,
+                address  _wallet
+               ) public{
+        offers[_UID] = Offer({ owner: msg.sender,
+                                    title: _title,
+                                    type_v: _type_v,
+                                    currencyCode: _currencyCode,
+                                    price: _price,
+                                    amount:_amount,
+                                    OwnerWallet: _wallet,
+                                    uid: _UID
+        });
+        offerList.push(offers[_UID]);
+        emit ProductCreated(_UID);
     }
     
-    modifier notOwner(){
-        require(msg.sender != owner);
-        _;
+    function returnAllOffers() public view returns(Offer[] memory){
+        return offerList;
+    }
+    
+    function getAmountByUID(string memory _UID) public view returns(uint256){
+        return offers[_UID].amount;
     }
     
     
-    function changeState(State _state) public {
-        offerState = _state;
+    function getCodeByUID(string memory _UID) public view returns(uint16){
+        return offers[_UID].currencyCode;
     }
-    
-    
-    function returnContents() public view returns(string memory, uint, string memory, State) {
-        return (title, price, description, offerState);
-    }
+
 }
